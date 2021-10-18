@@ -48,9 +48,4 @@ export const addNetwork = (page: Page, version?: string) => async ({
   const saveButton = await page.waitForSelector('.network-form__footer > button.button.btn-secondary');
   await saveButton.click();
 
-  await page.waitForSelector('button.button.btn-danger');
-  const logo = await page.waitForSelector('.app-header__logo-container.app-header__logo-container--clickable');
-  await logo.click();
-
-  await page.waitForXPath(`//*[text() = '${networkName}']`);
 };
