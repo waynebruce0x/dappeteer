@@ -47,5 +47,4 @@ export const addNetwork = (page: Page, version?: string) => async ({
 
   const saveButton = await page.waitForSelector('.network-form__footer > button.button.btn-secondary');
   await saveButton.click();
-
 };

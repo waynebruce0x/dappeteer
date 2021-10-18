@@ -44,6 +44,13 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
+"@chainsafe/dappeteer@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@chainsafe/dappeteer/-/dappeteer-2.2.0.tgz#420a83e3e8b8caa70604357e192caa6cbe73cf19"
+  integrity sha512-YY3uVpQMPVNJdCGfZ0W2PzJtjSKi2ZRS8G2ozSo5QpOPkSGxvyW5RiI4hIOgw9C/y2LepPFr4+VN2KgAIGdWxQ==
+  dependencies:
+    node-stream-zip "^1.13.0"
+
 "@eslint/eslintrc@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.3.0.tgz#d736d6963d7003b6514e6324bec9c602ac340318"
