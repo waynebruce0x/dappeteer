@@ -42,9 +42,10 @@ exports.addNetwork = (page, version) => ({ networkName, rpc, chainId, symbol, ex
         const explorerInput = yield page.waitForSelector('input#block-explorer-url');
         yield explorerInput.type(explorer);
     }
-    yield delay(100);
+    yield delay(200);
     const saveButton = yield page.waitForSelector('.network-form__footer > button.button.btn-secondary');
     yield saveButton.click();
+    yield delay(200);
 });
 function delay(delayInms) {
     return new Promise(resolve => {
