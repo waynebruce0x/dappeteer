@@ -44,7 +44,15 @@ export const addNetwork = (page: Page, version?: string) => async ({
     const explorerInput = await page.waitForSelector('input#block-explorer-url');
     await explorerInput.type(explorer);
   }
-
+  await delay(200);
   const saveButton = await page.waitForSelector('.network-form__footer > button.button.btn-secondary');
+  await delay(200);
   await saveButton.click();
 };
+async function delay(delayInms): Promise<number> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(2);
+    }, delayInms);
+  });
+}
