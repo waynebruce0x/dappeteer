@@ -51,7 +51,7 @@
     "jest-environment-node": "^27.1.1",
     "mocha": "7.2.0",
     "prettier": "^2.2.1",
-    "puppeteer": "5.5.0",
+    "puppeteer": "^13",
     "serve-handler": "5.0.8",
     "solc": "0.5.2",
     "ts-node": "9.1.1",
