@@ -17,5 +17,11 @@ exports.approve = (page, version) => () => __awaiter(void 0, void 0, void 0, fun
     const button = yield page.waitForSelector('button.button.btn-primary');
     yield button.click();
     const connectButton = yield page.waitForSelector('button.button.btn-primary');
+    yield delay(5000)
     yield connectButton.click();
 });
+async function delay (time) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, time)
+    })
+  }

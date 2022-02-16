@@ -42,5 +42,11 @@ exports.confirmTransaction = (page, getSingedIn, version) => (options) => __awai
         yield save.click();
     }
     const confirmButton = yield page.waitForSelector('.btn-primary');
+    yield delay(5000)
     yield confirmButton.click();
 });
+async function delay (time) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, time)
+    })
+  }
