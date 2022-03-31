@@ -16,34 +16,18 @@ exports.addNetwork = (page, version) => ({ networkName, rpc, chainId, symbol, ex
     const networkSwitcher = yield page.waitForSelector('.network-display');
     yield networkSwitcher.click();
     yield page.waitForSelector('li.dropdown-menu-item');
-    const networkIndex = yield page.evaluate((network) => {
-        const elements = document.querySelectorAll('li.dropdown-menu-item');
-        for (let i = 0; i < elements.length; i++) {
-            const element = elements[i];
-            if (element.innerText.toLowerCase().includes(network.toLowerCase())) {
-                return i;
-            }
-        }
-        return elements.length - 1;
-    }, 'Custom RPC');
-    const networkButton = (yield page.$$('li.dropdown-menu-item'))[networkIndex];
+
+    const networkButton = (yield page.$('.network-droppo > div > button'));
+
     yield networkButton.click();
-    const networkNameInput = yield page.waitForSelector('input#network-name');
+    const networkNameInput = yield page.waitForSelector('div:nth-child(1) > label > input');
     yield networkNameInput.type(networkName);
-    const rpcInput = yield page.waitForSelector('input#rpc-url');
+    const rpcInput = yield page.waitForSelector('div:nth-child(2) > label > input');
     yield rpcInput.type(rpc);
-    const chainIdInput = yield page.waitForSelector('input#chainId');
+    const chainIdInput = yield page.waitForSelector('div:nth-child(3) > label > input');
     yield chainIdInput.type(String(chainId));
-    if (symbol) {
-        const symbolInput = yield page.waitForSelector('input#network-ticker');
-        yield symbolInput.type(symbol);
-    }
-    if (explorer) {
-        const explorerInput = yield page.waitForSelector('input#block-explorer-url');
-        yield explorerInput.type(explorer);
-    }
     yield delay(200);
-    const saveButton = yield page.waitForSelector('.network-form__footer > button.button.btn-secondary');
+    const saveButton = yield page.waitForSelector('.btn-primary');
     yield saveButton.click();
     yield delay(200);
 });
