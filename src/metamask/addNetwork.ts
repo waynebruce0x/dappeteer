@@ -14,26 +14,17 @@ export const addNetwork = (page: Page, version?: string) => async ({
   const networkSwitcher = await page.waitForSelector('.network-display');
   await networkSwitcher.click();
   await page.waitForSelector('li.dropdown-menu-item');
-  const networkIndex = await page.evaluate((network) => {
-    const elements = document.querySelectorAll('li.dropdown-menu-item');
-    for (let i = 0; i < elements.length; i++) {
-      const element = elements[i];
-      if ((element as HTMLLIElement).innerText.toLowerCase().includes(network.toLowerCase())) {
-        return i;
-      }
-    }
-    return elements.length - 1;
-  }, 'Custom RPC');
-  const networkButton = (await page.$$('li.dropdown-menu-item'))[networkIndex];
+
+  const networkButton = await page.$('.network-droppo > div > button');
   await networkButton.click();
 
-  const networkNameInput = await page.waitForSelector('input#network-name');
+  const networkNameInput = await page.waitForSelector('div:nth-child(1) > label > input');
   await networkNameInput.type(networkName);
 
-  const rpcInput = await page.waitForSelector('input#rpc-url');
+  const rpcInput = await page.waitForSelector('div:nth-child(2) > label > input');
   await rpcInput.type(rpc);
 
-  const chainIdInput = await page.waitForSelector('input#chainId');
+  const chainIdInput = await page.waitForSelector('div:nth-child(3) > label > input');
   await chainIdInput.type(String(chainId));
 
   if (symbol) {
@@ -45,7 +36,7 @@ export const addNetwork = (page: Page, version?: string) => async ({
     await explorerInput.type(explorer);
   }
   await delay(200);
-  const saveButton = await page.waitForSelector('.network-form__footer > button.button.btn-secondary');
+  const saveButton = await page.waitForSelector('.btn-primary');
   await delay(200);
   await saveButton.click();
 };

@@ -5,9 +5,9 @@ export const approve = (page: Page, version?: string) => async (): Promise<void>
   await page.bringToFront();
   await page.reload();
 
-  const button = await page.waitForSelector('button.button.btn-primary');
+  const button = await page.waitForSelector('.btn-primary');
   await button.click();
 
-  const connectButton = await page.waitForSelector('button.button.btn-primary');
+  const connectButton = await page.waitForSelector('.btn-primary');
   await connectButton.click();
 };

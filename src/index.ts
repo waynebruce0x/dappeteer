@@ -164,11 +164,11 @@ async function importAccount(metamaskPage: puppeteer.Page, seed: string, passwor
   const metricsOptOut = await metamaskPage.waitForSelector('.metametrics-opt-in button.btn-primary');
   await metricsOptOut.click();
 
-  const showSeedPhraseInput = await metamaskPage.waitForSelector('#ftf-chk1-label');
-  await showSeedPhraseInput.click();
-
-  const seedPhraseInput = await metamaskPage.waitForSelector('.first-time-flow textarea');
-  await seedPhraseInput.type(seed);
+  const seedArray = seed.split(" ");
+  for (let i = 0; i < 12; i++) {
+      const seedPhraseInput = await metamaskPage.waitForSelector(`#import-srp__srp-word-${i}`);
+      await seedPhraseInput.type(seedArray[i]);
+  }
 
   const passwordInput = await metamaskPage.waitForSelector('#password');
   await passwordInput.type(password);
@@ -184,7 +184,13 @@ async function importAccount(metamaskPage: puppeteer.Page, seed: string, passwor
 
   const doneButton = await metamaskPage.waitForSelector('.end-of-flow button');
   await doneButton.click();
-
+  
+  await delay(1000)
   const popupButton = await metamaskPage.waitForSelector('.popover-header__button');
   await popupButton.click();
+}
+async function delay (time) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, time)
+  })
 }
