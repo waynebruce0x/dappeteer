@@ -13,15 +13,18 @@ exports.approve = void 0;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 exports.approve = (page, version) => () => __awaiter(void 0, void 0, void 0, function* () {
     yield page.bringToFront();
-    //yield page.reload();
-    //yield delay(5000)
+    //await page.reload();
+    //await delay(5000)
     const button = yield page.waitForSelector('.btn-primary');
     yield button.click();
     const connectButton = yield page.waitForSelector('.btn-primary');
     yield connectButton.click();
 });
-async function delay (time) {
-    return new Promise(function (resolve) {
-      setTimeout(resolve, time)
-    })
-  }
+function delay(time) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise(function (resolve) {
+            setTimeout(resolve, time);
+        });
+    });
+}
+;

@@ -146,13 +146,15 @@ function importAccount(metamaskPage, seed, password) {
         yield restoreButton.click();
         const doneButton = yield metamaskPage.waitForSelector('.end-of-flow button');
         yield doneButton.click();
-        yield delay(1000)
+        yield delay(1000);
         const popupButton = yield metamaskPage.waitForSelector('.popover-header__button');
         yield popupButton.click();
     });
 }
-async function delay (time) {
-    return new Promise(function (resolve) {
-      setTimeout(resolve, time)
-    })
-  }
+function delay(time) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise(function (resolve) {
+            setTimeout(resolve, time);
+        });
+    });
+}

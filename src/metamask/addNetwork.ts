@@ -28,13 +28,10 @@ export const addNetwork = (page: Page, version?: string) => async ({
   await chainIdInput.type(String(chainId));
 
   if (symbol) {
-    const symbolInput = await page.waitForSelector('input#network-ticker');
+    const symbolInput = await page.waitForSelector('div:nth-child(4) > label > input');
     await symbolInput.type(symbol);
   }
-  if (explorer) {
-    const explorerInput = await page.waitForSelector('input#block-explorer-url');
-    await explorerInput.type(explorer);
-  }
+  
   await delay(200);
   const saveButton = await page.waitForSelector('.btn-primary');
   await delay(200);

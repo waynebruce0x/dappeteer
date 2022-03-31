@@ -16,9 +16,7 @@ exports.addNetwork = (page, version) => ({ networkName, rpc, chainId, symbol, ex
     const networkSwitcher = yield page.waitForSelector('.network-display');
     yield networkSwitcher.click();
     yield page.waitForSelector('li.dropdown-menu-item');
-
-    const networkButton = (yield page.$('.network-droppo > div > button'));
-
+    const networkButton = yield page.$('.network-droppo > div > button');
     yield networkButton.click();
     const networkNameInput = yield page.waitForSelector('div:nth-child(1) > label > input');
     yield networkNameInput.type(networkName);
@@ -26,17 +24,21 @@ exports.addNetwork = (page, version) => ({ networkName, rpc, chainId, symbol, ex
     yield rpcInput.type(rpc);
     const chainIdInput = yield page.waitForSelector('div:nth-child(3) > label > input');
     yield chainIdInput.type(String(chainId));
-    const symbolInput = yield page.waitForSelector('div:nth-child(4) > label > input');
-    yield symbolInput.type(symbol);
+    if (symbol) {
+        const symbolInput = yield page.waitForSelector('div:nth-child(4) > label > input');
+        yield symbolInput.type(symbol);
+    }
     yield delay(200);
     const saveButton = yield page.waitForSelector('.btn-primary');
-    yield saveButton.click();
     yield delay(200);
+    yield saveButton.click();
 });
 function delay(delayInms) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve(2);
-      }, delayInms);
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(2);
+            }, delayInms);
+        });
     });
-  }
+}

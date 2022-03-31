@@ -176,16 +176,16 @@ async function importAccount(metamaskPage: puppeteer.Page, seed: string, passwor
   const passwordConfirmInput = await metamaskPage.waitForSelector('#confirm-password');
   await passwordConfirmInput.type(password);
 
-  const acceptTerms = await metamaskPage.waitForSelector('.first-time-flow__terms');
+  const acceptTerms = await metamaskPage.waitForSelector('.check-box');
   await acceptTerms.click();
 
-  const restoreButton = await metamaskPage.waitForSelector('.first-time-flow button');
+  const restoreButton = await metamaskPage.waitForSelector('.btn-primary');
   await restoreButton.click();
 
   const doneButton = await metamaskPage.waitForSelector('.end-of-flow button');
   await doneButton.click();
   
-  await delay(1000)
+  await delay(1000);
   const popupButton = await metamaskPage.waitForSelector('.popover-header__button');
   await popupButton.click();
 }
