@@ -131,21 +131,28 @@ function importAccount(metamaskPage, seed, password) {
         yield importLink.click();
         const metricsOptOut = yield metamaskPage.waitForSelector('.metametrics-opt-in button.btn-primary');
         yield metricsOptOut.click();
-        const showSeedPhraseInput = yield metamaskPage.waitForSelector('#ftf-chk1-label');
-        yield showSeedPhraseInput.click();
-        const seedPhraseInput = yield metamaskPage.waitForSelector('.first-time-flow textarea');
-        yield seedPhraseInput.type(seed);
+        const seedArray = seed.split(" ");
+        for (let i = 0; i < 12; i++) {
+            const seedPhraseInput = yield metamaskPage.waitForSelector(`#import-srp__srp-word-${i}`);
+            yield seedPhraseInput.type(seedArray[i]);
+        }
         const passwordInput = yield metamaskPage.waitForSelector('#password');
         yield passwordInput.type(password);
         const passwordConfirmInput = yield metamaskPage.waitForSelector('#confirm-password');
         yield passwordConfirmInput.type(password);
-        const acceptTerms = yield metamaskPage.waitForSelector('.first-time-flow__terms');
+        const acceptTerms = yield metamaskPage.waitForSelector('.check-box');
         yield acceptTerms.click();
-        const restoreButton = yield metamaskPage.waitForSelector('.first-time-flow button');
+        const restoreButton = yield metamaskPage.waitForSelector('.btn-primary');
         yield restoreButton.click();
         const doneButton = yield metamaskPage.waitForSelector('.end-of-flow button');
         yield doneButton.click();
+        yield delay(1000)
         const popupButton = yield metamaskPage.waitForSelector('.popover-header__button');
         yield popupButton.click();
     });
 }
+async function delay (time) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, time)
+    })
+  }

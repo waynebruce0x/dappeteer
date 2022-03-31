@@ -26,6 +26,8 @@ exports.addNetwork = (page, version) => ({ networkName, rpc, chainId, symbol, ex
     yield rpcInput.type(rpc);
     const chainIdInput = yield page.waitForSelector('div:nth-child(3) > label > input');
     yield chainIdInput.type(String(chainId));
+    const symbolInput = yield page.waitForSelector('div:nth-child(4) > label > input');
+    yield symbolInput.type(symbol);
     yield delay(200);
     const saveButton = yield page.waitForSelector('.btn-primary');
     yield saveButton.click();
