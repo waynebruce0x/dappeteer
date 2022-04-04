@@ -98,24 +98,11 @@ const getMetamaskReleases = (version) => new Promise((resolve, reject) => {
             body += chunk;
         });
         response.on('end', () => {
-            const data = JSON.parse(body);
-            if (data.message)
-                return reject(data.message);
-            for (const result of data) {
-                if (result.draft)
-                    continue;
-                if (version === 'latest' || result.name.includes(version) || result.tag_name.includes(version)) {
-                    for (const asset of result.assets) {
-                        if (asset.name.includes('chrome'))
-                            resolve({
-                                downloadUrl: asset.browser_download_url,
-                                filename: asset.name,
-                                tag: result.tag_name,
-                            });
-                    }
-                }
-            }
-            reject(`Version ${version} not found!`);
+            resolve({
+                downloadUrl: 'https://github.com/MetaMask/metamask-extension/releases/download/v10.1.1/metamask-chrome-10.1.1.zip',
+                filename: "metamask-chrome-10.1.1.zip",
+                tag: "v10.1.1",
+            });
         });
     });
     request.on('error', (error) => {

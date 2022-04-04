@@ -131,11 +131,10 @@ function importAccount(metamaskPage, seed, password) {
         yield importLink.click();
         const metricsOptOut = yield metamaskPage.waitForSelector('.metametrics-opt-in button.btn-primary');
         yield metricsOptOut.click();
-        const seedArray = seed.split(" ");
-        for (let i = 0; i < 12; i++) {
-            const seedPhraseInput = yield metamaskPage.waitForSelector(`#import-srp__srp-word-${i}`);
-            yield seedPhraseInput.type(seedArray[i]);
-        }
+        const showSeedPhraseInput = yield metamaskPage.waitForSelector('#ftf-chk1-label');
+        yield showSeedPhraseInput.click();
+        const seedPhraseInput = yield metamaskPage.waitForSelector('.first-time-flow textarea');
+        yield seedPhraseInput.type(seed);
         const passwordInput = yield metamaskPage.waitForSelector('#password');
         yield passwordInput.type(password);
         const passwordConfirmInput = yield metamaskPage.waitForSelector('#confirm-password');

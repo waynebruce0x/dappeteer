@@ -16,20 +16,28 @@ exports.addNetwork = (page, version) => ({ networkName, rpc, chainId, symbol, ex
     const networkSwitcher = yield page.waitForSelector('.network-display');
     yield networkSwitcher.click();
     yield page.waitForSelector('li.dropdown-menu-item');
-    const networkButton = yield page.$('.network-droppo > div > button');
-    yield networkButton.click();
-    const networkNameInput = yield page.waitForSelector('div:nth-child(1) > label > input');
+    const networkIndex = yield page.evaluate((network) => {
+        const elements = document.querySelectorAll('li.dropdown-menu-item');
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            if (element.innerText.toLowerCase().includes(network.toLowerCase())) {
+                return i;
+            }
+        }
+        return elements.length - 1;
+    }, 'Custom RPC');
+    const networkNameInput = yield page.waitForSelector('input#network-name');
     yield networkNameInput.type(networkName);
-    const rpcInput = yield page.waitForSelector('div:nth-child(2) > label > input');
+    const rpcInput = yield page.waitForSelector('input#rpc-url');
     yield rpcInput.type(rpc);
-    const chainIdInput = yield page.waitForSelector('div:nth-child(3) > label > input');
+    const chainIdInput = yield page.waitForSelector('input#chainId');
     yield chainIdInput.type(String(chainId));
     if (symbol) {
         const symbolInput = yield page.waitForSelector('div:nth-child(4) > label > input');
         yield symbolInput.type(symbol);
     }
     yield delay(200);
-    const saveButton = yield page.waitForSelector('.btn-primary');
+    const saveButton = yield page.waitForSelector('.network-form__footer > button.button.btn-secondary');
     yield delay(200);
     yield saveButton.click();
 });
