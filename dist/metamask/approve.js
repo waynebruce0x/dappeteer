@@ -13,7 +13,7 @@ exports.approve = void 0;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 exports.approve = (page, version) => () => __awaiter(void 0, void 0, void 0, function* () {
     yield page.bringToFront();
-    //await page.reload();
+    yield page.reload();
     //await delay(5000)
     const button = yield page.waitForSelector('.btn-primary');
     yield button.click();

@@ -36,7 +36,7 @@ export const addNetwork = (page: Page, version?: string) => async ({
   await chainIdInput.type(String(chainId));
 
   if (symbol) {
-    const symbolInput = await page.waitForSelector('div:nth-child(4) > label > input');
+    const symbolInput = await page.waitForSelector('input#network-ticker');
     await symbolInput.type(symbol);
   }
   

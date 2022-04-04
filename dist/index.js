@@ -139,9 +139,9 @@ function importAccount(metamaskPage, seed, password) {
         yield passwordInput.type(password);
         const passwordConfirmInput = yield metamaskPage.waitForSelector('#confirm-password');
         yield passwordConfirmInput.type(password);
-        const acceptTerms = yield metamaskPage.waitForSelector('.check-box');
+        const acceptTerms = yield metamaskPage.waitForSelector('.first-time-flow__terms');
         yield acceptTerms.click();
-        const restoreButton = yield metamaskPage.waitForSelector('.btn-primary');
+        const restoreButton = yield metamaskPage.waitForSelector('.first-time-flow button');
         yield restoreButton.click();
         const doneButton = yield metamaskPage.waitForSelector('.end-of-flow button');
         yield doneButton.click();

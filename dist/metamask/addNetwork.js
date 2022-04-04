@@ -33,7 +33,7 @@ exports.addNetwork = (page, version) => ({ networkName, rpc, chainId, symbol, ex
     const chainIdInput = yield page.waitForSelector('input#chainId');
     yield chainIdInput.type(String(chainId));
     if (symbol) {
-        const symbolInput = yield page.waitForSelector('div:nth-child(4) > label > input');
+        const symbolInput = yield page.waitForSelector('input#network-ticker');
         yield symbolInput.type(symbol);
     }
     yield delay(200);
