@@ -26,6 +26,8 @@ exports.addNetwork = (page, version) => ({ networkName, rpc, chainId, symbol, ex
         }
         return elements.length - 1;
     }, 'Custom RPC');
+    const networkButton = (yield page.$$('li.dropdown-menu-item'))[networkIndex];
+    yield networkButton.click();
     const networkNameInput = yield page.waitForSelector('input#network-name');
     yield networkNameInput.type(networkName);
     const rpcInput = yield page.waitForSelector('input#rpc-url');

@@ -25,7 +25,9 @@ export const addNetwork = (page: Page, version?: string) => async ({
     }
     return elements.length - 1;
   }, 'Custom RPC');
-
+  const networkButton = (await page.$$('li.dropdown-menu-item'))[networkIndex];
+  await networkButton.click();
+  
   const networkNameInput = await page.waitForSelector('input#network-name');
   await networkNameInput.type(networkName);
 
