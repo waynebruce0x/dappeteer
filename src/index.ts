@@ -164,11 +164,11 @@ async function importAccount(metamaskPage: puppeteer.Page, seed: string, passwor
   const metricsOptOut = await metamaskPage.waitForSelector('.metametrics-opt-in button.btn-primary');
   await metricsOptOut.click();
 
-  const seedArray = seed.split(" ");
-  for (let i = 0; i < 12; i++) {
-      const seedPhraseInput = await metamaskPage.waitForSelector(`#import-srp__srp-word-${i}`);
-      await seedPhraseInput.type(seedArray[i]);
-  }
+  const showSeedPhraseInput = await metamaskPage.waitForSelector('#ftf-chk1-label');
+  await showSeedPhraseInput.click();
+
+  const seedPhraseInput = await metamaskPage.waitForSelector('.first-time-flow textarea');
+  await seedPhraseInput.type(seed);
 
   const passwordInput = await metamaskPage.waitForSelector('#password');
   await passwordInput.type(password);
