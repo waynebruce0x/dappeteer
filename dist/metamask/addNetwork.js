@@ -40,8 +40,9 @@ exports.addNetwork = (page, version) => ({ networkName, rpc, chainId, symbol, ex
     }
     yield delay(200);
     const saveButton = yield page.waitForSelector('.network-form__footer > button.button.btn-secondary');
-    yield delay(200);
     yield saveButton.click();
+    const closeButton = yield page.waitForSelector('.settings-page__close-button');
+    yield closeButton.click();
 });
 function delay(delayInms) {
     return __awaiter(this, void 0, void 0, function* () {

@@ -27,7 +27,7 @@ export const addNetwork = (page: Page, version?: string) => async ({
   }, 'Custom RPC');
   const networkButton = (await page.$$('li.dropdown-menu-item'))[networkIndex];
   await networkButton.click();
-  
+
   const networkNameInput = await page.waitForSelector('input#network-name');
   await networkNameInput.type(networkName);
 
@@ -44,8 +44,10 @@ export const addNetwork = (page: Page, version?: string) => async ({
   
   await delay(200);
   const saveButton = await page.waitForSelector('.network-form__footer > button.button.btn-secondary');
-  await delay(200);
   await saveButton.click();
+
+  const closeButton = await page.waitForSelector('.settings-page__close-button');
+  await closeButton.click();
 };
 async function delay(delayInms): Promise<number> {
   return new Promise((resolve) => {

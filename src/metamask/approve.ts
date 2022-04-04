@@ -4,7 +4,7 @@ import { Page } from 'puppeteer';
 export const approve = (page: Page, version?: string) => async (): Promise<void> => {
   await page.bringToFront();
   await page.reload();
-  //await delay(5000)
+  await delay(5000)
   const button = await page.waitForSelector('.btn-primary');
   await button.click();
 
