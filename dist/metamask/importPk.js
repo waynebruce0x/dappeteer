@@ -19,6 +19,15 @@ exports.importPk = (page, version) => (privateKey) => __awaiter(void 0, void 0, 
     yield addAccount.click();
     const pKInput = yield page.waitForSelector('input#private-key-box');
     yield pKInput.type(privateKey);
+    yield delay(1000);
     const importButton = yield page.waitForSelector('button.btn-secondary');
     yield importButton.click();
 });
+function delay(time) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise(function (resolve) {
+            setTimeout(resolve, time);
+        });
+    });
+}
+;

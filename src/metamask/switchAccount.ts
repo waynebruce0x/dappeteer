@@ -5,6 +5,12 @@ export const switchAccount = (page: Page, version?: string) => async (accountNum
   await page.bringToFront();
   const accountSwitcher = await page.waitForSelector('.identicon');
   await accountSwitcher.click();
+  await delay(500)
   const account = await page.waitForSelector(`.account-menu__accounts > div:nth-child(${accountNumber})`);
   await account.click();
+};
+async function delay (time) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, time)
+  })
 };

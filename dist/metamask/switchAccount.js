@@ -15,6 +15,15 @@ exports.switchAccount = (page, version) => (accountNumber) => __awaiter(void 0, 
     yield page.bringToFront();
     const accountSwitcher = yield page.waitForSelector('.identicon');
     yield accountSwitcher.click();
+    yield delay(500);
     const account = yield page.waitForSelector(`.account-menu__accounts > div:nth-child(${accountNumber})`);
     yield account.click();
 });
+function delay(time) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise(function (resolve) {
+            setTimeout(resolve, time);
+        });
+    });
+}
+;

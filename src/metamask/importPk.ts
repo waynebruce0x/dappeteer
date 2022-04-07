@@ -9,6 +9,12 @@ export const importPk = (page: Page, version?: string) => async (privateKey: str
   await addAccount.click();
   const pKInput = await page.waitForSelector('input#private-key-box');
   await pKInput.type(privateKey);
+  await delay(1000)
   const importButton = await page.waitForSelector('button.btn-secondary');
   await importButton.click();
+};
+async function delay (time) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, time)
+  })
 };
