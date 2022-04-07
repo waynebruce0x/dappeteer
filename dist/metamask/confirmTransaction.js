@@ -16,7 +16,7 @@ exports.confirmTransaction = (page, getSingedIn, version) => (options) => __awai
     if (!(yield getSingedIn())) {
         throw new Error("You haven't signed in yet");
     }
-    yield page.waitForTimeout(5000);
+    yield page.waitForTimeout(7000);
     yield page.reload();
     if (options) {
         const editSelector = '.transaction-detail-edit:nth-child(1) button';

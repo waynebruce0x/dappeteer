@@ -12,7 +12,7 @@ export const confirmTransaction = (page: Page, getSingedIn: GetSingedIn, version
   if (!(await getSingedIn())) {
     throw new Error("You haven't signed in yet");
   }
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(7000);
   await page.reload();
 
   if (options) {
