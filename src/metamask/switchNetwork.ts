@@ -3,6 +3,10 @@ import { Page } from 'puppeteer';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const switchNetwork = (page: Page, version?: string) => async (network = 'main'): Promise<void> => {
   await page.bringToFront();
+  try {
+    const popup = await page.waitForSelector('#popover-content button', { timeout: 3000 })
+    await popup.click()
+  } catch { }
   const networkSwitcher = await page.waitForSelector('.network-display');
   await networkSwitcher.click();
   await page.waitForSelector('li.dropdown-menu-item');
