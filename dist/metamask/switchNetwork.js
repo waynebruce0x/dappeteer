@@ -13,6 +13,11 @@ exports.switchNetwork = void 0;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 exports.switchNetwork = (page, version) => (network = 'main') => __awaiter(void 0, void 0, void 0, function* () {
     yield page.bringToFront();
+    try {
+        const popup = yield page.waitForSelector('#popover-content button', { timeout: 3000 });
+        yield popup.click();
+    }
+    catch (_a) { }
     const networkSwitcher = yield page.waitForSelector('.network-display');
     yield networkSwitcher.click();
     yield page.waitForSelector('li.dropdown-menu-item');
