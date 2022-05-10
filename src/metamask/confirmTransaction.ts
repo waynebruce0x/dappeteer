@@ -50,7 +50,7 @@ export const confirmTransaction = (page: Page, getSingedIn: GetSingedIn, version
     const save = await page.waitForSelector(saveSelector);
     await save.click();
   }
-  await page.waitForTimeout(4000);
+  await page.waitForTimeout(7000);
   const confirmButton = await page.waitForSelector('.btn-primary');
   await confirmButton.click();
 };
